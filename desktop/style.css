@@ -1,0 +1,689 @@
+/* desktop/construction-team/style.css
+ * Hermes 施工团队 (construction-team) 桌面插件紧凑样式
+ * 兼容 Hermes 深色/浅色 CSS 变量 (Inter/mono/药丸状态/无宽表折叠)
+ */
+
+.hct-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: var(--ui-panel-bg, var(--background, #121316));
+  color: var(--ui-text-primary, var(--foreground, #f3f4f6));
+  font-family: var(--font-sans, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 13px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hct-root *, .hct-root *::before, .hct-root *::after {
+  box-sizing: border-box;
+}
+
+/* 顶部紧凑标题栏 */
+.hct-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--ui-border, rgba(255, 255, 255, 0.08));
+  background: var(--ui-panel-header-bg, rgba(255, 255, 255, 0.02));
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.hct-header-left {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.hct-title-zh {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ui-text-primary, #fff);
+  white-space: nowrap;
+}
+
+.hct-subtitle-en {
+  font-size: 11px;
+  color: var(--ui-text-tertiary, #9ca3af);
+  text-transform: lowercase;
+  letter-spacing: 0;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, monospace);
+  white-space: nowrap;
+}
+
+.hct-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* 错误与警告条 */
+.hct-banner {
+  padding: 6px 12px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.hct-banner-error {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.hct-banner-warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fcd34d;
+  border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* 主内容双栏 / 单栏布局 */
+.hct-main {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.hct-sidebar {
+  width: 260px;
+  min-width: 220px;
+  max-width: 340px;
+  border-right: 1px solid var(--ui-border, rgba(255, 255, 255, 0.08));
+  display: flex;
+  flex-direction: column;
+  background: var(--ui-sidebar-bg, rgba(0, 0, 0, 0.12));
+}
+
+.hct-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 14px;
+  gap: 14px;
+}
+
+/* 团队列表 */
+.hct-team-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hct-team-item {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  gap: 4px;
+}
+
+.hct-team-item:hover {
+  background: var(--chrome-action-hover, rgba(255, 255, 255, 0.05));
+}
+
+.hct-team-item.hct-active {
+  background: var(--ui-panel-item-active, rgba(99, 102, 241, 0.12));
+  border-color: var(--ui-accent, #6366f1);
+}
+
+.hct-team-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.hct-team-name {
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--ui-text-primary, #fff);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hct-team-item-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--ui-text-tertiary, #9ca3af);
+}
+
+/* 状态药丸 (Pills) */
+.hct-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 7px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.hct-pill-accepted, .hct-pill-approved {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.hct-pill-active {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.hct-pill-running {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.hct-pill-completed {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.hct-pill-paused, .hct-pill-unknown, .hct-pill-needs-reconcile, .hct-pill-needs_reconcile {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.hct-pill-interrupted, .hct-pill-stopped, .hct-pill-failed, .hct-pill-rejected, .hct-pill-blocked {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.hct-pill-pending, .hct-pill-dispatched, .hct-pill-idle {
+  background: rgba(148, 163, 184, 0.15);
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.hct-pill-candidate, .hct-pill-review_pending, .hct-pill-awaiting_review {
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+/* 按钮规范 */
+.hct-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 5px;
+  border: 1px solid var(--ui-border, rgba(255, 255, 255, 0.12));
+  background: var(--ui-button-bg, rgba(255, 255, 255, 0.05));
+  color: var(--ui-text-primary, #f3f4f6);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.hct-btn:hover:not(:disabled) {
+  background: var(--chrome-action-hover, rgba(255, 255, 255, 0.1));
+  border-color: var(--ui-border-hover, rgba(255, 255, 255, 0.25));
+}
+
+.hct-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.hct-btn-primary {
+  background: var(--ui-accent, #6366f1);
+  border-color: var(--ui-accent, #6366f1);
+  color: #ffffff;
+}
+
+.hct-btn-primary:hover:not(:disabled) {
+  background: #4f46e5;
+  border-color: #4f46e5;
+}
+
+.hct-btn-danger {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.hct-btn-danger:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: #ef4444;
+}
+
+.hct-btn-xs {
+  padding: 2px 6px;
+  font-size: 11px;
+}
+
+/* 卡片与模块面板 */
+.hct-card {
+  background: var(--ui-card-bg, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--ui-border, rgba(255, 255, 255, 0.07));
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.hct-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.015);
+  border-bottom: 1px solid var(--ui-border, rgba(255, 255, 255, 0.05));
+}
+
+.hct-card-title {
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ui-text-primary, #f9fafb);
+}
+
+.hct-card-body {
+  padding: 10px 12px;
+}
+
+/* 树形视图规范 (第一级总控Root / 第二级主管Supervisors / 第三级Workers与Tasks) */
+.hct-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hct-tree-root {
+  border: 1px solid var(--ui-border, rgba(255, 255, 255, 0.1));
+  border-radius: 8px;
+  background: var(--ui-card-bg, rgba(255, 255, 255, 0.02));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.hct-tree-root-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--ui-border, rgba(255, 255, 255, 0.08));
+  user-select: none;
+}
+
+.hct-tree-root-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.supervisors, .hct-supervisors {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hct-tree-node {
+  border: 1px solid var(--ui-border, rgba(255, 255, 255, 0.07));
+  border-left: 3px solid var(--ui-accent, #6366f1);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.015);
+  overflow: hidden;
+  padding: 4px 8px;
+}
+
+.hct-tree-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.hct-tree-branch {
+  margin-top: 6px;
+  padding-left: 12px;
+  border-left: 1px dashed var(--ui-border, rgba(255, 255, 255, 0.12));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 顾问旁路 Sidecar (只读无Worker) */
+.hct-advisor-sidecar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(168, 85, 247, 0.05);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 6px;
+}
+
+.hct-advisor-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.hct-badge-advisor {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  background: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+.hct-worker-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+  padding-left: 6px;
+}
+
+.hct-worker-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--ui-border, rgba(255, 255, 255, 0.05));
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+/* 表单控件 */
+.hct-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.hct-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ui-text-secondary, #9ca3af);
+}
+
+.hct-input, .hct-select, .hct-textarea {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid var(--ui-border, rgba(255, 255, 255, 0.15));
+  background: var(--ui-input-bg, rgba(0, 0, 0, 0.2));
+  color: var(--ui-text-primary, #fff);
+  outline: none;
+  font-family: inherit;
+}
+
+.hct-input:focus, .hct-select:focus, .hct-textarea:focus {
+  border-color: var(--ui-accent, #6366f1);
+}
+
+.hct-input:disabled, .hct-select:disabled, .hct-textarea:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: var(--ui-input-disabled-bg, rgba(255, 255, 255, 0.04));
+  border-color: var(--ui-border, rgba(255, 255, 255, 0.08));
+}
+
+.hct-checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ui-text-primary, #fff);
+}
+
+.hct-code {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, monospace);
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.hct-team-config-scope {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--ui-border, rgba(255, 255, 255, 0.06));
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hct-textarea {
+  min-height: 54px;
+  resize: vertical;
+}
+
+/* 模态框 / 二次确认 */
+.hct-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.hct-modal {
+  background: var(--ui-panel-bg, #1e1e24);
+  border: 1px solid var(--ui-border, rgba(255, 255, 255, 0.15));
+  border-radius: 8px;
+  width: 90%;
+  max-width: 480px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+
+.hct-modal > form,
+.hct-modal form {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.hct-modal-header {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--ui-border, rgba(255, 255, 255, 0.08));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.hct-modal-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hct-modal-body {
+  padding: 14px;
+  overflow-y: auto;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  flex: 1;
+}
+
+.hct-modal-footer {
+  padding: 10px 14px;
+  border-top: 1px solid var(--ui-border, rgba(255, 255, 255, 0.08));
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.015);
+  flex-shrink: 0;
+}
+
+/* 域统计聚合条（超过15条任务时聚合展示） */
+.hct-stats-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 11px;
+}
+
+.hct-stat-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+}
+
+/* 空状态 */
+.hct-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  text-align: center;
+  gap: 10px;
+  color: var(--ui-text-secondary, #9ca3af);
+}
+
+.hct-empty-icon {
+  font-size: 28px;
+  opacity: 0.6;
+}
+
+.hct-empty-desc {
+  max-width: 320px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Outbox 阻塞与告警 */
+.hct-outbox-alert {
+  border-left: 3px solid #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+  padding: 8px 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.hct-code-box {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+/* 任务列表与卡片 */
+.hct-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hct-task-item {
+  background: var(--ui-card-bg, rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--ui-border, rgba(255, 255, 255, 0.06));
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.15s ease;
+}
+
+.hct-task-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.hct-task-item-header:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.hct-task-item-body {
+  padding: 10px 12px;
+  border-top: 1px solid var(--ui-border, rgba(255, 255, 255, 0.05));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.hct-task-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hct-task-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ui-text-secondary, #9ca3af);
+}

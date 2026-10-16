@@ -1,0 +1,15 @@
+name: construction-team
+version: "0.2.0"
+description: "持久主管会话、临时工人、真实候选回报和项目级控制"
+author: "@0xdcc"
+license: "MIT"
+provides_tools:
+  - construction_team
+  - construction_workers
+provides_hooks:
+  - post_llm_call
+  - subagent_start
+  - pre_tool_call
+provides_commands:
+  - team
+requires_hermes: ">=0.21.6"

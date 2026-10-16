@@ -1,0 +1,12 @@
+{
+  "name": "construction-team",
+  "label": "施工团队",
+  "description": "Hermes multi-agent construction team coordinator and execution engine",
+  "icon": "Users",
+  "version": "0.2.0",
+  "tab": {
+    "path": "/construction-team",
+    "position": "after:skills"
+  },
+  "api": "plugin_api.py"
+}
